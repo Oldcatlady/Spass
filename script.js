@@ -230,11 +230,12 @@ function checkAnswer(value) {
 }
 
 /* ========================================
-   NAVIGATION
+   NAVIGATION & ERKLÄRUNGS-STOPP (KORRIGIERT)
    ======================================== */
 function nextQuestion() {
     let q = questions[current];
 
+    // FALL 1: Der User hat noch gar keine Antwort ausgewählt oder eingegeben
     if (!answered) {
         if (q.type === "text" || q.type === "copy") {
             let value = document.getElementById("textAnswer").value;
@@ -242,43 +243,28 @@ function nextQuestion() {
                 let fb = document.getElementById("feedback");
                 fb.className = "wrong";
                 fb.innerHTML = "Bitte gib zuerst eine Antwort ein.";
+                fb.style.display = "block"; // Zwingt zur Sichtbarkeit
                 return;
             }
-            checkAnswer(value);
+            checkAnswer(value); // Wertet aus und ZEIGT die Erklärung
             return;
         }
+        
+        // Bei Multiple Choice weisen wir den User darauf hin, etwas anzuklicken
         let fb = document.getElementById("feedback");
         fb.className = "wrong";
         fb.innerHTML = "Bitte wähle zuerst eine Antwort aus.";
+        fb.style.display = "block";
         return;
     }
 
+    // FALL 2: Die Frage WURDE bereits beantwortet und die Erklärung wird gerade angezeigt.
+    // Erst beim NÄCHSTEN Klick auf "Weiter" gehen wir wirklich zur nächsten Frage!
     current++;
     if (current < questions.length) {
-        loadQuestion();
+        loadQuestion(); // Lädt die nächste Frage und versteckt die alte Erklärung wieder
     } else {
         showResult();
-    }
-}
-
-function prevQuestion() {
-    if (current > 0) {
-        current--;
-        loadQuestion();
-    }
-}
-
-function updateNavButtons() {
-    let prevBtn = document.getElementById("prevBtn");
-    let nextBtn = document.getElementById("nextBtn");
-
-    prevBtn.style.display = (current > 0 && history[current - 1]) ? "block" : "none";
-    nextBtn.style.display = "block";
-
-    if (current >= questions.length - 1 && answered) {
-        nextBtn.innerText = "Auswertung →";
-    } else {
-        nextBtn.innerText = "Weiter →";
     }
 }
 
