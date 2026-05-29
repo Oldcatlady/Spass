@@ -17,8 +17,8 @@
         "options": [
             "A) Die Lautstärke",
             "B) Anzahl der Pixel",
-            "C) Die Farbe",
-            "D) Die Stromstärke"
+            "C) Anzahl der Farbe",
+            "D) Benötigte Stromstärke"
         ],
         "answer": "B",
         "explanation": "Die Auflösung gibt an, aus wie vielen Pixeln das Bild aufgebaut ist – angegeben als Breite × Höhe, z. B. 1920×1080. Je mehr Pixel, desto schärfer und detailreicher das Bild. Bei größeren Monitoren ist eine hohe Auflösung besonders wichtig, damit das Bild nicht pixelig wirkt."
@@ -40,9 +40,9 @@
         "type": "mc",
         "options": [
             "A) 144 Aktualisierungen pro Sekunde",
-            "B) 144 Pixel",
-            "C) 144 Farben",
-            "D) 144 Anschlüsse"
+            "B) 144 Pixel-Aktualisierungen",
+            "C) 144 Farben pro Sekunde",
+            "D) 144 Stromanschluss"
         ],
         "answer": "A",
         "explanation": "Hz (Hertz) gibt die Bildwiederholrate an – also wie oft der Monitor das Bild pro Sekunde neu aufbaut. Bei 144 Hz werden 144 Bilder pro Sekunde dargestellt, was Bewegungen deutlich flüssiger wirken lässt als bei 60 Hz. Für schnelle Spiele ist eine hohe Bildwiederholrate ein klarer Vorteil."
@@ -51,9 +51,9 @@
         "question": "Was beschreibt die Reaktionszeit?",
         "type": "mc",
         "options": [
-            "A) Die Größe des Monitors",
-            "B) Die Lautsprecherleistung",
-            "C) Die Auflösung",
+            "A) Wie schnell der Monitor an geht",
+            "B) Wie schnell der Ton ausgegeben wird",
+            "C) Wie schnell die Bilder wechseln",
             "D) Wie schnell Pixel die Farbe wechseln"
         ],
         "answer": "D",
@@ -123,10 +123,10 @@
         "question": "Was ist ein Nachteil von OLED-Displays?",
         "type": "mc",
         "options": [
-            "A) Keine Farben",
+            "A) Stumpfe Farben",
             "B) Niedrige Auflösung",
             "C) Burn-In Gefahr",
-            "D) Keine Reaktionszeit"
+            "D) Langsame Reaktionszeit"
         ],
         "answer": "C",
         "explanation": "Burn-In bezeichnet das dauerhafte Einbrennen von statischen Bildelementen in das Display, da organische Pixel sich mit der Zeit unterschiedlich abnutzen. Besonders gefährdet sind Bereiche mit dauerhaft sichtbaren Elementen wie Taskleisten oder HUD-Anzeigen in Spielen. Hersteller versuchen dies durch Pixelverschiebung und Bildschirmschoner zu minimieren."
@@ -147,10 +147,10 @@
         "question": "Was macht Adaptive Sync?",
         "type": "mc",
         "options": [
-            "A) Erhöht die Lautstärke",
+            "A) Synchronisiert Audio-Output und Monitor",
             "B) Synchronisiert GPU und Monitor",
-            "C) Spart Strom",
-            "D) Erhöht Farben"
+            "C) Verlängert Akkuleistung",
+            "D) Gibt Farben harmonisch wieder"
         ],
         "answer": "B",
         "explanation": "Adaptive Sync synchronisiert die Bildwiederholrate des Monitors dynamisch mit der Bildrate der Grafikkarte. Dadurch wird Screen-Tearing verhindert, ohne die Eingabeverzögerung zu erhöhen wie beim klassischen V-Sync. Die bekanntesten Implementierungen sind AMDs FreeSync und NVIDIAs G-Sync."
@@ -159,10 +159,10 @@
         "question": "Welche Adaptive-Sync-Technologie stammt von AMD?",
         "type": "mc",
         "options": [
-            "A) Bluetooth",
-            "B) USB",
+            "A) Hotsynch",
+            "B) USBSynch",
             "C) FreeSync",
-            "D) Ethernet"
+            "D) MySynch"
         ],
         "answer": "C",
         "explanation": "FreeSync ist AMDs Implementierung von Adaptive Sync und basiert auf dem offenen DisplayPort-Standard. Im Gegensatz zu NVIDIAs G-Sync benötigt FreeSync keine proprietäre Hardware im Monitor, weshalb FreeSync-Monitore oft günstiger sind. Viele FreeSync-Monitore sind mittlerweile auch mit NVIDIAs G-Sync Compatible zertifiziert."
@@ -171,10 +171,10 @@
         "question": "Was ist Screen-Tearing?",
         "type": "mc",
         "options": [
-            "A) Screen-Tearing",
+            "A) Visueller Bildfehler",
             "B) Defekter Monitor",
             "C) Schwarzer Bildschirm",
-            "D) Pixelfehler"
+            "D) Kaputter Pixel"
         ],
         "answer": "A",
         "explanation": "Screen-Tearing entsteht, wenn die Grafikkarte ein neues Bild sendet, während der Monitor noch das vorherige aufbaut – es werden dann Teile zweier verschiedener Frames gleichzeitig angezeigt. Das Ergebnis ist ein horizontal zerrissenes Bild, das besonders bei schnellen Kamerabewegungen sichtbar wird. Adaptive Sync löst dieses Problem zuverlässig."
@@ -183,9 +183,9 @@
         "question": "Warum bevorzugen Spieler 144-Hz-Monitore?",
         "type": "mc",
         "options": [
-            "A) Wegen höherer Lautstärke",
+            "A) Wegen verbesserter Kontraste",
             "B) Wegen flüssiger Bewegungen",
-            "C) Wegen größerer Pixel",
+            "C) Wegen der Farbtiefe",
             "D) Wegen VGA"
         ],
         "answer": "B",
@@ -195,10 +195,10 @@
         "question": "Warum ist eine geringe Reaktionszeit beim Gaming wichtig?",
         "type": "mc",
         "options": [
-            "A) Mehr Stromverbrauch",
-            "B) Mehr Lautsprecher",
+            "A) Weniger Hitze auf der CPU",
+            "B) Weniger Ips-Latenz",
             "C) Weniger Ghosting",
-            "D) Mehr Gewicht"
+            "D) Weniger Kern-Warping"
         ],
         "answer": "C",
         "explanation": "Ghosting bezeichnet Schlieren oder Nachzieheffekte bei schnellen Bewegungen, die entstehen, wenn Pixel nicht schnell genug ihre Farbe wechseln. Eine niedrige Reaktionszeit (1–5 ms) minimiert diesen effekt und sorgt für ein scharfes, klares Bild auch in schnellen Spielszenen. Besonders bei Egoshootern und Rennspielen ist das ein wichtiger Faktor."
@@ -231,10 +231,10 @@
         "question": "Was beschreibt das Kontrastverhältnis?",
         "type": "mc",
         "options": [
-            "A) Die Auflösung",
-            "B) Die Hz-Zahl",
+            "A) Unterschied zwischen Hz und Bild",
+            "B) Bildstabilität im Vergleich zum Blickwinkel",
             "C) Unterschied zwischen hellstem und dunkelstem Bild",
-            "D) Die Lautstärke"
+            "D) Unterschied zwischen Farbwerten und Dunkelwerten"
         ],
         "answer": "C",
         "explanation": "Das Kontrastverhältnis gibt an, wie groß der Helligkeitsunterschied zwischen dem hellsten Weiß und dem dunkelsten Schwarz eines Monitors ist. Ein Verhältnis von 1000:1 bedeutet, dass das Weiß 1000-mal heller ist als das Schwarz. Hoher Kontrast sorgt für sattere Farben, tiefere Schwarztöne und ein insgesamt lebendigeres Bild."
