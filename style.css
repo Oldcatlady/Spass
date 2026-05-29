@@ -18,23 +18,23 @@
 
     --btn-bg: #c2479a;
 
-    --btn-hover: #e879a0;
+    --btn-hover: #df5485;
 
     --btn-text: #fff;
 
     --accent: #ffb3d9;
 
-    --correct-bg: #7a2e55;
+    --correct-bg: #68cb47;
 
-    --correct-txt: #d4f4b8;
+    --correct-txt: #e5ffce;
 
-    --wrong-bg: #6b1c3a;
+    --wrong-bg: #a52c2c;
 
     --wrong-txt: #ffb3b3;
 
     --progress-bg: #9b4a7a;
 
-    --progress-fg: #ff9dd6;
+    --progress-fg: #f69dd1;
 
     --border: #b0569a;
 
@@ -46,13 +46,13 @@
 
 body.man_power {
 
-    --bg: #0d2b4e;
+    --bg: #060d61;
 
     --bg2: #07192e;
 
     --card-bg: #1a4070;
 
-    --card-bg2: #0f2a4a;
+    --card-bg2: #0d305a;
 
     --text: #d6eaff;
 
@@ -60,17 +60,17 @@ body.man_power {
 
     --btn-bg: #2971b8;
 
-    --btn-hover: #378add;
+    --btn-hover: #1d93a8;
 
     --btn-text: #fff;
 
     --accent: #7ec8f4;
 
-    --correct-bg: #174d32;
+    --correct-bg: #159857;
 
     --correct-txt: #b8f4c8;
 
-    --wrong-bg: #4a1515;
+    --wrong-bg: #973434;
 
     --wrong-txt: #ffc0c0;
 
@@ -88,13 +88,13 @@ body.man_power {
 
 body.dark_side {
 
-    --bg: #0e0e14;
+    --bg: #1c1c44;
 
-    --bg2: #07070c;
+    --bg2: #020219;
 
-    --card-bg: #1a1a26;
+    --card-bg: #2a174f;
 
-    --card-bg2: #121220;
+    --card-bg2: #132f5f;
 
     --text: #cdd6f4;
 
@@ -102,17 +102,17 @@ body.dark_side {
 
     --btn-bg: #313244;
 
-    --btn-hover: #45475a;
+    --btn-hover: #4f4162;
 
     --btn-text: #cdd6f4;
 
     --accent: #89b4fa;
 
-    --correct-bg: #1a3a2a;
+    --correct-bg: #28744e;
 
-    --correct-txt: #a6e3a1;
+    --correct-txt: #c7f4c2;
 
-    --wrong-bg: #3a1a1a;
+    --wrong-bg: #802d2d;
 
     --wrong-txt: #f38ba8;
 
@@ -130,11 +130,11 @@ body.dark_side {
 
 body.crystal_pure {
 
-    --bg: #dde8f0;
+    --bg: #bcdef6;
 
-    --bg2: #c5d5e3;
+    --bg2: #ffdddd;
 
-    --card-bg: #f5f9fc;
+    --card-bg: #c5f3fe;
 
     --card-bg2: #eaf1f7;
 
@@ -152,11 +152,11 @@ body.crystal_pure {
 
     --correct-bg: #d0f0dd;
 
-    --correct-txt: #1a5e30;
+    --correct-txt: #257c40;
 
     --wrong-bg: #f7d6d6;
 
-    --wrong-txt: #8b1a1a;
+    --wrong-txt: #9a1a1a;
 
     --progress-bg: #b0c8db;
 
@@ -1146,7 +1146,7 @@ h1 {
 
     height: 4px;
 
-    background: #000;
+    background: #341919;
 
     border-radius: 50%;
 
@@ -1186,7 +1186,7 @@ h1 {
 
         radial-gradient(circle, #ffff4d 2px, transparent 2px),
 
-        radial-gradient(circle, #ffff4d 1.5px, transparent 1.5px);
+        radial-gradient(circle, #ffed21 1.5px, transparent 1.5px);
 
     background-size: 10px 10px;
 
