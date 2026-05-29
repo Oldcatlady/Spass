@@ -660,3 +660,114 @@ h1 {
     0% { transform: rotate(-20deg); }
     100% { transform: rotate(20deg); }
 }
+
+/* ========================================
+   ECHSEN-STYLES (RETTE DIE ECHSE!)
+   ======================================== */
+
+/* Der Toggle-Button unten links */
+#lizardToggleBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    padding: 10px 15px;
+    background: var(--card-bg, #2a2a3a);
+    color: var(--text, #ffffff);
+    border: 2px solid var(--accent, #e879a0);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#lizardToggleBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* Das Echsen-Containment */
+#lizard {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 120px;
+    height: 60px;
+    z-index: 999;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 1;
+    transform: scale(1) rotate(-10deg);
+}
+
+/* CRITICAL FIX: Wenn "lizard-hidden" aktiv ist, schrumpft sie und verschwindet */
+#lizard.lizard-hidden {
+    opacity: 0;
+    transform: scale(0) translateY(100px) rotate(45deg);
+    pointer-events: none; /* Klicks gehen durch sie hindurch, wenn sie weg ist */
+}
+
+/* Ein einfacher, süßer Echsenkörper (falls du kein komplexes SVG hast) */
+.lizard-body {
+    position: relative;
+    width: 80px;
+    height: 35px;
+    background: #4eed84; /* Echsen-Grün */
+    border-radius: 50% 50% 40% 40%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Der Kopf */
+.lizard-head {
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background: #4eed84;
+    border-radius: 50%;
+}
+
+/* Die Wackel-Augen */
+.lizard-eye {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #000;
+    border-radius: 50%;
+    top: 6px;
+}
+.lizard-eye.left { left: 6px; }
+.lizard-eye.right { right: 6px; }
+
+/* Der Schwanz */
+.lizard-tail {
+    position: absolute;
+    left: -30px;
+    top: 10px;
+    width: 40px;
+    height: 12px;
+    background: #4eed84;
+    border-radius: 50%;
+    transform: rotate(-15deg);
+    transform-origin: right center;
+    animation: tailWag 1s ease-in-out infinite alternate;
+}
+
+/* Die Beine */
+.leg {
+    position: absolute;
+    width: 15px;
+    height: 8px;
+    background: #3cb863;
+    border-radius: 4px;
+}
+.front-left  { top: -5px; right: 15px; }
+.front-right { bottom: -5px; right: 15px; }
+.back-left   { top: -5px; left: 15px; }
+.back-right  { bottom: -5px; left: 15px; }
+
+/* Eine kleine Animation, damit sie lebt! */
+@keyframes tailWag {
+    0% { transform: rotate(-10deg); }
+    100% { transform: rotate(15deg); }
+}
