@@ -18,19 +18,14 @@ let history = [];
    ======================================== */
 function previewTheme(theme) {
     selectedTheme = theme;
-    // Wechselt sofort das Theme auf dem gesamten Body
     document.body.className = theme === "girl_power" ? "" : theme;
 
-    // Setzt den aktiven Rahmen auf den geklickten Button
     document.querySelectorAll(".theme-btn").forEach(btn => {
         btn.classList.toggle("active-theme", btn.dataset.theme === theme);
     });
 
-    // Prüft erst, ob die Vorschau existiert, damit nichts abstürzt!
     const preview = document.getElementById("themePreview");
-    if (preview) {
-        preview.classList.add("visible");
-    }
+    preview.classList.add("visible");
 }
 
 /* ========================================
@@ -76,10 +71,8 @@ function loadQuestion() {
     document.getElementById("question").innerText = cleanQuestionText(q.question);
     document.getElementById("feedback").className = "";
     document.getElementById("feedback").innerHTML = "";
-    document.getElementById("feedback").style.style = "none"; // Fix für Style-Zuweisung
     document.getElementById("feedback").style.display = "none"; 
     document.getElementById("textAnswer").value = "";
-    document.getElementById("textAnswer").disabled = false;
 
     clearAnswerButtons();
 
@@ -182,18 +175,15 @@ function renderQuestionWithState(q, state) {
         feedback.className = "wrong";
         feedback.innerHTML = `<b>Falsch!</b><br>Richtige Antwort:<br><b>${q.answer}</b><br><br>${q.explanation}`;
     }
-    
-    feedback.style.display = "block"; 
 }
 
 /* ========================================
-   ANTWORT PRÜFEN
+   ANTWORT PRÜFEN (KORRIGIERT)
    ======================================= */
 function checkAnswer(value) {
-    // Verhindert das erneute Auswerten, falls die Frage bereits beantwortet wurde
-    if (history[current]) return; 
-    
+    if (answered) return;
     answered = true;
+
     let q = questions[current];
     let feedback = document.getElementById("feedback");
 
@@ -201,7 +191,6 @@ function checkAnswer(value) {
         btn.disabled = true;
         btn.style.opacity = "0.5";
     });
-    document.getElementById("textAnswer").disabled = true;
 
     let userAnswer = value?.trim().toLowerCase();
     let correctAnswer = q.answer?.trim().toLowerCase();
@@ -230,12 +219,8 @@ function checkAnswer(value) {
         feedback.innerHTML = `<b>Falsch!</b><br>Richtige Antwort:<br><b>${q.answer}</b><br><br>${q.explanation}`;
     }
 
+    // KORREKTUR: Zwingt die Erklärung, sich sofort auf dem Bildschirm einzublenden!
     feedback.style.display = "block"; 
-
-    let nextBtn = document.getElementById("nextBtn");
-    if (nextBtn) {
-        nextBtn.style.display = "block";
-    }
 
     history[current] = {
         answered: true,
@@ -248,12 +233,11 @@ function checkAnswer(value) {
 }
 
 /* ========================================
-   NAVIGATION & ERKLÄRUNGS-STOPP
+   NAVIGATION
    ======================================== */
 function nextQuestion() {
     let q = questions[current];
 
-    // REPARIERT: Klick wertet erst aus, zeigt Feedback und stoppt. Der NÄCHSTE Klick schaltet weiter.
     if (!answered) {
         if (q.type === "text" || q.type === "copy") {
             let value = document.getElementById("textAnswer").value;
@@ -261,23 +245,20 @@ function nextQuestion() {
                 let fb = document.getElementById("feedback");
                 fb.className = "wrong";
                 fb.innerHTML = "Bitte gib zuerst eine Antwort ein.";
-                fb.style.display = "block"; 
                 return;
             }
-            checkAnswer(value); 
+            checkAnswer(value);
             return;
         }
-        
         let fb = document.getElementById("feedback");
         fb.className = "wrong";
         fb.innerHTML = "Bitte wähle zuerst eine Antwort aus.";
-        fb.style.display = "block";
         return;
     }
 
     current++;
     if (current < questions.length) {
-        loadQuestion(); 
+        loadQuestion();
     } else {
         showResult();
     }
@@ -294,17 +275,13 @@ function updateNavButtons() {
     let prevBtn = document.getElementById("prevBtn");
     let nextBtn = document.getElementById("nextBtn");
 
-    if (prevBtn) {
-        prevBtn.style.display = current > 0 ? "block" : "none";
-    }
-    if (nextBtn) {
-        // Zeigt den Weiter-Button immer an, sobald geantwortet wurde oder es eine Textfrage ist
-        let q = questions[current];
-        if (answered || (q && (q.type === "text" || q.type === "copy"))) {
-            nextBtn.style.display = "block";
-        } else {
-            nextBtn.style.display = "none";
-        }
+    prevBtn.style.display = (current > 0 && history[current - 1]) ? "block" : "none";
+    nextBtn.style.display = "block";
+
+    if (current >= questions.length - 1 && answered) {
+        nextBtn.innerText = "Auswertung →";
+    } else {
+        nextBtn.innerText = "Weiter →";
     }
 }
 
@@ -342,7 +319,7 @@ function showResult() {
     <div class="grade-badge">${grade}</div>
     <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:16px;">IHK-Note (1 = beste)</p>
     <p style="font-size:1.1rem; margin-bottom:6px;">
-      ${gradeLabel} ${percent.toFixed(1)}% reached
+      ${gradeLabel} ${percent.toFixed(1)}% erreicht
     </p>
     <p style="color:var(--text-muted); margin-bottom:4px;">
       ✔ ${correct} richtige &nbsp;|&nbsp; ✖ ${wrong} falsche Antworten
@@ -421,23 +398,212 @@ fetch("questions.json")
         showPage("startPage");
         const defaultBtn = document.querySelector('[data-theme="girl_power"]');
         if (defaultBtn) defaultBtn.classList.add("active-theme");
+        
+        // AUTOMATISCHER TRIGGERS: Startet die Echsen-Uhr sofort, wenn die Fragen geladen sind!
+        resetLizardTimer();
     })
-    .catch(err => console.error("Fehler beim Laden der Fragen:", err));
+    .catch(err => {
+        console.error("Fehler beim Laden der Fragen:", err);
+        document.body.innerHTML =
+            "<p style='color:red;padding:20px;'>Fehler: questions.json konnte nicht geladen werden.</p>";
+    });
 
-/* ========================================
-   ECHSEN-GIMMICK (TOGGLE)
-   ======================================== */
-function toggleLizard() {
-    const lizard = document.getElementById("lizard");
-    const btn = document.getElementById("lizardToggleBtn");
     
-    if (!lizard || !btn) return; // Sicherheitscheck
+/* ========================================
+   ECHSEN-STEUERUNG (SCHNELLE SCHLEIFE)
+   ======================================== */
+const lizard = document.getElementById("lizard");
+const toggleBtn = document.getElementById("lizardToggleBtn");
 
-    if (lizard.classList.contains("lizard-hidden")) {
-        lizard.classList.remove("lizard-hidden");
-        btn.innerText = "🦎 An";
+let lizardActive = true;
+let lizardState = "hidden"; 
+let posX = 0, posY = 0;
+let targetX = 0, targetY = 0;
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let angle = 0;
+let lizardInterval = null;
+let lastTime = performance.now();
+
+window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+toggleBtn.addEventListener("click", () => {
+    lizardActive = !lizardActive;
+    if (!lizardActive) {
+        toggleBtn.innerText = "🦎 Ein";
+        toggleBtn.classList.add("disabled");
+        hideLizardImmediately();
     } else {
-        lizard.classList.add("lizard-hidden");
-        btn.innerText = "🦎 Aus";
+        toggleBtn.innerText = "🦎 Aus";
+        toggleBtn.classList.remove("disabled");
+        resetLizardTimer();
     }
+});
+
+lizard.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    if (lizardState === "hidden" || lizardState === "panicking" || lizardState === "escaping") return;
+    triggerEscapeRoutine();
+});
+
+function hideLizardImmediately() {
+    lizard.classList.add("lizard-hidden");
+    lizard.classList.remove("lizard-walk-anim", "lizard-blink", "lizard-panic");
+    lizardState = "hidden";
+    clearTimeout(lizardInterval); // GEÄNDERT: Nutzt jetzt setTimeout für präzise Steuerung
+}
+
+// GEÄNDERT: Startet das erste Mal sofort beim Laden der Seite
+function resetLizardTimer() {
+    clearTimeout(lizardInterval);
+    if (lizardActive && lizardState === "hidden") {
+        spawnLizard();
+    }
+}
+
+function spawnLizard() {
+    lizardState = "walkingToCenter";
+    lizard.classList.remove("lizard-hidden");
+    lizard.classList.add("lizard-walk-anim");
+
+    const side = Math.floor(Math.random() * 4);
+    const offset = 80; 
+    
+    if (side === 0) { 
+        posX = Math.random() * window.innerWidth;
+        posY = -offset;
+    } else if (side === 1) { 
+        posX = window.innerWidth + offset;
+        posY = Math.random() * window.innerHeight;
+    } else if (side === 2) { 
+        posX = Math.random() * window.innerWidth;
+        posY = window.innerHeight + offset;
+    } else { 
+        posX = -offset;
+        posY = Math.random() * window.innerHeight;
+    }
+
+    targetX = window.innerWidth / 2;
+    targetY = window.innerHeight / 2;
+    
+    lastTime = performance.now();
+    requestAnimationFrame(updateLizardBehavior);
+}
+
+function updateLizardBehavior(currentTime) {
+    if (!lizardActive || lizardState === "hidden") return;
+
+    let dt = (currentTime - lastTime) / 16.666; 
+    if (dt > 4) dt = 4; 
+    lastTime = currentTime;
+
+    if (lizardState === "panicking") {
+        requestAnimationFrame(updateLizardBehavior);
+        return;
+    }
+
+    if (lizardState === "walkingToCenter") {
+        moveTowardsTarget(2.5, dt); 
+        
+        if (Math.hypot(targetX - posX, targetY - posY) < 25) {
+            lizardState = "staring";
+            lizard.classList.remove("lizard-walk-anim");
+            lizard.classList.add("lizard-blink");
+            
+            angle = -Math.PI / 2; 
+            lizard.style.transform = `translate(${posX}px, ${posY}px) rotate(${angle}rad)`;
+
+            setTimeout(() => {
+                if (lizardState === "staring") {
+                    lizard.classList.remove("lizard-blink");
+                    lizard.classList.add("lizard-walk-anim");
+                    lizardState = "chasing"; 
+                }
+            }, 2500);
+        }
+    } 
+    else if (lizardState === "chasing") {
+        targetX = mouseX;
+        targetY = mouseY;
+        moveTowardsTarget(2.0, dt); 
+    }
+    else if (lizardState === "escaping") {
+        moveTowardsTarget(6.0, dt); 
+        
+        // GEÄNDERT: Sobald sie den Bildschirmrand verlässt, wird der 3-Sekunden-Timer für das nächste Mal gestartet
+        if (posX < -150 || posX > window.innerWidth + 150 || posY < -150 || posY > window.innerHeight + 150) {
+            hideLizardImmediately();
+            
+            if (lizardActive) {
+                // Warte exakt 3 Sekunden (3000ms), dann spawne die Echse neu!
+                lizardInterval = setTimeout(() => {
+                    if (lizardActive && lizardState === "hidden") spawnLizard();
+                }, 3000); 
+            }
+            return; 
+        }
+    }
+
+    if (lizardState !== "panicking" && lizardState !== "staring") {
+        lizard.style.transform = `translate(${posX}px, ${posY}px) rotate(${angle}rad)`;
+    }
+
+    requestAnimationFrame(updateLizardBehavior);
+}
+
+function moveTowardsTarget(currentSpeed, dt) {
+    let dx = targetX - posX;
+    let dy = targetY - posY;
+    let distance = Math.hypot(dx, dy);
+
+    if (distance > 5) {
+        angle = Math.atan2(dy, dx);
+        posX += Math.cos(angle) * currentSpeed * dt;
+        posY += Math.sin(angle) * currentSpeed * dt;
+    }
+}
+
+function triggerEscapeRoutine() {
+    lizardState = "panicking";
+    lizard.classList.remove("lizard-walk-anim");
+    lizard.classList.add("lizard-panic");
+
+    setTimeout(() => {
+        if (lizardState !== "panicking") return;
+        lizard.classList.remove("lizard-panic");
+        lizard.classList.add("lizard-walk-anim");
+        
+        let startTime = Date.now();
+        let radius = 40;
+        let startX = posX;
+        let startY = posY;
+
+        function runLoop() {
+            let elapsed = Date.now() - startTime;
+            if (elapsed < 800) { 
+                let alpha = (elapsed / 800) * Math.PI * 2;
+                posX = startX + Math.sin(alpha) * radius;
+                posY = startY + (1 - Math.cos(alpha)) * radius;
+                angle = alpha + Math.PI / 2;
+                lizard.style.transform = `translate(${posX}px, ${posY}px) rotate(${angle}rad)`;
+                requestAnimationFrame(runLoop);
+            } else {
+                const escapeSides = [
+                    {x: -200, y: posY}, 
+                    {x: window.innerWidth + 200, y: posY}, 
+                    {x: posX, y: -200}, 
+                    {x: posX, y: window.innerHeight + 200}
+                ];
+                let chosenSide = escapeSides[Math.floor(Math.random() * escapeSides.length)];
+                targetX = chosenSide.x;
+                targetY = chosenSide.y;
+                lastTime = performance.now();
+                lizardState = "escaping";
+            }
+        }
+        runLoop();
+    }, 600);
 }
