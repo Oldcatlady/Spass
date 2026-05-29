@@ -527,8 +527,8 @@ h1 {
 
 #lizard {
     position: fixed;
-    top: 0;       /* KORREKTUR: Startpunkt definiert */
-    left: 0;      /* KORREKTUR: Startpunkt definiert */
+    top: 0;
+    left: 0;
     width: 65px; 
     height: 35px;
     z-index: 9999;
