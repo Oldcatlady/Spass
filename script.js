@@ -26,12 +26,13 @@ function previewTheme(theme) {
         btn.classList.toggle("active-theme", btn.dataset.theme === theme);
     });
 
-    // REPARIERT: Prüft erst, ob die Vorschau existiert, damit nichts abstürzt!
+    // Prüft erst, ob die Vorschau existiert, damit nichts abstürzt!
     const preview = document.getElementById("themePreview");
     if (preview) {
         preview.classList.add("visible");
     }
 }
+
 /* ========================================
    SEITEN-NAVIGATION
    ======================================== */
@@ -75,8 +76,10 @@ function loadQuestion() {
     document.getElementById("question").innerText = cleanQuestionText(q.question);
     document.getElementById("feedback").className = "";
     document.getElementById("feedback").innerHTML = "";
+    document.getElementById("feedback").style.style = "none"; // Fix für Style-Zuweisung
     document.getElementById("feedback").style.display = "none"; 
     document.getElementById("textAnswer").value = "";
+    document.getElementById("textAnswer").disabled = false;
 
     clearAnswerButtons();
 
@@ -187,9 +190,10 @@ function renderQuestionWithState(q, state) {
    ANTWORT PRÜFEN
    ======================================= */
 function checkAnswer(value) {
-    if (answered) return;
+    // Verhindert das erneute Auswerten, falls die Frage bereits beantwortet wurde
+    if (history[current]) return; 
+    
     answered = true;
-
     let q = questions[current];
     let feedback = document.getElementById("feedback");
 
@@ -197,6 +201,7 @@ function checkAnswer(value) {
         btn.disabled = true;
         btn.style.opacity = "0.5";
     });
+    document.getElementById("textAnswer").disabled = true;
 
     let userAnswer = value?.trim().toLowerCase();
     let correctAnswer = q.answer?.trim().toLowerCase();
@@ -239,9 +244,7 @@ function checkAnswer(value) {
     };
 
     updateProgress();
-    if (typeof updateNavButtons === "function") {
-        updateNavButtons();
-    }
+    updateNavButtons();
 }
 
 /* ========================================
@@ -250,6 +253,7 @@ function checkAnswer(value) {
 function nextQuestion() {
     let q = questions[current];
 
+    // REPARIERT: Klick wertet erst aus, zeigt Feedback und stoppt. Der NÄCHSTE Klick schaltet weiter.
     if (!answered) {
         if (q.type === "text" || q.type === "copy") {
             let value = document.getElementById("textAnswer").value;
@@ -276,6 +280,31 @@ function nextQuestion() {
         loadQuestion(); 
     } else {
         showResult();
+    }
+}
+
+function prevQuestion() {
+    if (current > 0) {
+        current--;
+        loadQuestion();
+    }
+}
+
+function updateNavButtons() {
+    let prevBtn = document.getElementById("prevBtn");
+    let nextBtn = document.getElementById("nextBtn");
+
+    if (prevBtn) {
+        prevBtn.style.display = current > 0 ? "block" : "none";
+    }
+    if (nextBtn) {
+        // Zeigt den Weiter-Button immer an, sobald geantwortet wurde oder es eine Textfrage ist
+        let q = questions[current];
+        if (answered || (q && (q.type === "text" || q.type === "copy"))) {
+            nextBtn.style.display = "block";
+        } else {
+            nextBtn.style.display = "none";
+        }
     }
 }
 
@@ -392,3 +421,5 @@ fetch("questions.json")
         showPage("startPage");
         const defaultBtn = document.querySelector('[data-theme="girl_power"]');
         if (defaultBtn) defaultBtn.classList.add("active-theme");
+    })
+    .catch(err => console.error("Fehler beim Laden der Fragen:", err));
