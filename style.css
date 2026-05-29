@@ -227,8 +227,6 @@ h1 {
     margin-bottom: 10px;
 }
 
-.preview-card {}
-
 .preview-question {
     font-size: 0.88rem;
     font-weight: bold;
@@ -504,6 +502,7 @@ h1 {
     margin-bottom: 10px;
     opacity: 0.8;
 }
+
 /* ===== LIZARD STYLES ===== */
 #lizardToggleBtn {
     position: fixed;
@@ -520,6 +519,7 @@ h1 {
     cursor: pointer;
     transition: all 0.2s;
 }
+
 #lizardToggleBtn.disabled {
     background: #555;
     color: #aaa;
@@ -527,7 +527,9 @@ h1 {
 
 #lizard {
     position: fixed;
-    width: 65px; /* Entspricht ca. 1.7 cm auf Standard-Bildschirmen */
+    top: 0;       /* KORREKTUR: Startpunkt definiert */
+    left: 0;      /* KORREKTUR: Startpunkt definiert */
+    width: 65px; 
     height: 35px;
     z-index: 9999;
     cursor: pointer;
@@ -544,32 +546,28 @@ h1 {
     display: none !important;
 }
 
-/* Der Echsenkörper (Mittelgrün) */
 .lizard-body {
     position: relative;
     width: 35px;
     height: 16px;
-    background: #4ca64c; /* Mittelgrün */
+    background: #4ca64c; 
     border-radius: 50%;
 }
 
-/* Schlängel-Animation */
 .lizard-walk-anim .lizard-body {
     animation: lizardWiggle 0.2s infinite alternate ease-in-out;
 }
 
-/* Kopf (Hellgrün) */
 .lizard-head {
     position: absolute;
     right: -10px;
     top: -2px;
     width: 14px;
     height: 20px;
-    background: #73e673; /* Hellgrün */
+    background: #73e673; 
     border-radius: 50% 40% 40% 50%;
 }
 
-/* Augen */
 .lizard-eye {
     position: absolute;
     width: 4px;
@@ -580,7 +578,6 @@ h1 {
 .lizard-eye.left { top: 3px; right: 3px; }
 .lizard-eye.right { bottom: 3px; right: 3px; }
 
-/* Zwinkern */
 @keyframes eyeBlink {
     0%, 90%, 100% { transform: scaleY(1); }
     95% { transform: scaleY(0.1); }
@@ -589,7 +586,6 @@ h1 {
     animation: eyeBlink 0.3s infinite;
 }
 
-/* Gelbe Tupfen */
 .lizard-dots {
     position: absolute;
     width: 100%;
@@ -602,7 +598,6 @@ h1 {
     opacity: 0.9;
 }
 
-/* Beine (Hellgrün) */
 .leg {
     position: absolute;
     width: 6px;
@@ -616,7 +611,6 @@ h1 {
 .back-left { top: -6px; left: 6px; transform: rotate(-20deg); }
 .back-right { bottom: -6px; left: 6px; transform: rotate(20deg); transform-origin: bottom center; }
 
-/* Beinchen bewegen beim Laufen */
 @keyframes moveLegLeft {
     0% { transform: rotate(30deg); }
     100% { transform: rotate(-10deg); }
@@ -632,7 +626,6 @@ h1 {
     animation: moveLegRight 0.15s infinite alternate ease-in-out;
 }
 
-/* Schwanz */
 .lizard-tail {
     position: absolute;
     left: -14px;
@@ -647,7 +640,6 @@ h1 {
     animation: lizardTailWiggle 0.15s infinite alternate ease-in-out;
 }
 
-/* Zappeln-Animation */
 @keyframes lizardPanic {
     0% { transform: scale(1) translate(0, 0) rotate(0deg); }
     20% { transform: scale(1.1) translate(-3px, 2px) rotate(15deg); }
@@ -660,7 +652,6 @@ h1 {
     animation: lizardPanic 0.1s infinite !important;
 }
 
-/* Keyframes für Bewegungsmuster */
 @keyframes lizardWiggle {
     0% { transform: skewY(-6deg); }
     100% { transform: skewY(6deg); }
