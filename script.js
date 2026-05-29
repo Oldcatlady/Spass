@@ -11,7 +11,6 @@ let answered = false;
 let selectedTheme = "girl_power";
 
 // History: speichert den Zustand jeder beantworteten Frage
-// { answered: bool, userAnswer: string, wasCorrect: bool }
 let history = [];
 
 /* ========================================
@@ -19,16 +18,12 @@ let history = [];
    ======================================== */
 function previewTheme(theme) {
     selectedTheme = theme;
-
-    // Body-Klasse aktualisieren (Vorschau sofort sichtbar)
     document.body.className = theme === "girl_power" ? "" : theme;
 
-    // Aktiven Button markieren
     document.querySelectorAll(".theme-btn").forEach(btn => {
         btn.classList.toggle("active-theme", btn.dataset.theme === theme);
     });
 
-    // Vorschau einblenden
     const preview = document.getElementById("themePreview");
     preview.classList.add("visible");
 }
@@ -49,7 +44,6 @@ function goToStart() {
    QUIZ STARTEN
    ======================================== */
 function startQuiz() {
-    // Theme festschreiben
     document.body.className = selectedTheme === "girl_power" ? "" : selectedTheme;
 
     current = 0;
@@ -77,7 +71,7 @@ function loadQuestion() {
     document.getElementById("question").innerText = cleanQuestionText(q.question);
     document.getElementById("feedback").className = "";
     document.getElementById("feedback").innerHTML = "";
-    document.getElementById("feedback").style.display = "none"; // reset
+    document.getElementById("feedback").style.display = "none"; 
     document.getElementById("textAnswer").value = "";
 
     clearAnswerButtons();
@@ -85,7 +79,6 @@ function loadQuestion() {
     let answersDiv = document.getElementById("answers");
     answersDiv.innerHTML = "";
 
-    // Wurde diese Frage schon beantwortet? → Im Review-Modus anzeigen
     if (savedState) {
         answered = true;
         renderQuestionWithState(q, savedState);
@@ -130,7 +123,6 @@ function renderQuestion(q) {
 function renderQuestionWithState(q, state) {
     let answersDiv = document.getElementById("answers");
 
-    // Review-Tag
     let tag = document.createElement("div");
     tag.className = "reviewed-tag";
     tag.innerText = state.wasCorrect ? "✔ Richtig beantwortet" : "✖ Falsch beantwortet";
@@ -175,7 +167,6 @@ function renderQuestionWithState(q, state) {
         }
     }
 
-    // Feedback anzeigen
     let feedback = document.getElementById("feedback");
     if (state.wasCorrect) {
         feedback.className = "correct";
@@ -312,14 +303,14 @@ function updateProgress() {
 }
 
 /* ========================================
-   ERGEBNIS (KORRIGIERT NACH OFFIZIELLEM IHK-SCHLÜSSEL)
+   ERGEBNIS (IHK-SCHLÜSSEL)
    ======================================== */
 function showResult() {
     let total = questions.length;
     let percent = total > 0 ? (correct / total) * 100 : 0;
     let grade = getGrade(percent);
 
-    // Bis Note 4 (ab exakt 50%) gilt die IHK-Prüfung als bestanden 👍
+    // Bis Note 4 (ab exakt 50%) gilt es als bestanden 👍
     let gradeLabel = grade <= 2 ? "🎉" : grade <= 4 ? "👍" : "📚";
 
     document.getElementById("resultContent").innerHTML = `
