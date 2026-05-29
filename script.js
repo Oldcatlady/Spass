@@ -175,6 +175,9 @@ function renderQuestionWithState(q, state) {
         feedback.className = "wrong";
         feedback.innerHTML = `<b>Falsch!</b><br>Richtige Antwort:<br><b>${q.answer}</b><br><br>${q.explanation}`;
     }
+    
+    // REPARIERT: Zeigt die Erklärung beim Anschauen alter Fragen
+    feedback.style.display = "block"; 
 }
 
 /* ========================================
@@ -219,6 +222,9 @@ function checkAnswer(value) {
         feedback.innerHTML = `<b>Falsch!</b><br>Richtige Antwort:<br><b>${q.answer}</b><br><br>${q.explanation}`;
     }
 
+    // REPARIERT: Blendet das Feedback-Feld nach dem Klick sofort ein!
+    feedback.style.display = "block"; 
+
     history[current] = {
         answered: true,
         userAnswer: value,
@@ -230,12 +236,11 @@ function checkAnswer(value) {
 }
 
 /* ========================================
-   NAVIGATION & ERKLÄRUNGS-STOPP (KORRIGIERT)
+   NAVIGATION & ERKLÄRUNGS-STOPP
    ======================================== */
 function nextQuestion() {
     let q = questions[current];
 
-    // FALL 1: Der User hat noch gar keine Antwort ausgewählt oder eingegeben
     if (!answered) {
         if (q.type === "text" || q.type === "copy") {
             let value = document.getElementById("textAnswer").value;
@@ -243,14 +248,13 @@ function nextQuestion() {
                 let fb = document.getElementById("feedback");
                 fb.className = "wrong";
                 fb.innerHTML = "Bitte gib zuerst eine Antwort ein.";
-                fb.style.display = "block"; // Zwingt zur Sichtbarkeit
+                fb.style.display = "block"; 
                 return;
             }
-            checkAnswer(value); // Wertet aus und ZEIGT die Erklärung
+            checkAnswer(value); 
             return;
         }
         
-        // Bei Multiple Choice weisen wir den User darauf hin, etwas anzuklicken
         let fb = document.getElementById("feedback");
         fb.className = "wrong";
         fb.innerHTML = "Bitte wähle zuerst eine Antwort aus.";
@@ -258,11 +262,9 @@ function nextQuestion() {
         return;
     }
 
-    // FALL 2: Die Frage WURDE bereits beantwortet und die Erklärung wird gerade angezeigt.
-    // Erst beim NÄCHSTEN Klick auf "Weiter" gehen wir wirklich zur nächsten Frage!
     current++;
     if (current < questions.length) {
-        loadQuestion(); // Lädt die nächste Frage und versteckt die alte Erklärung wieder
+        loadQuestion(); 
     } else {
         showResult();
     }
@@ -302,7 +304,7 @@ function showResult() {
     <div class="grade-badge">${grade}</div>
     <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:16px;">IHK-Note (1 = beste)</p>
     <p style="font-size:1.1rem; margin-bottom:6px;">
-      ${gradeLabel} ${percent.toFixed(1)}% erreicht
+      ${gradeLabel} ${percent.toFixed(1)}% reached
     </p>
     <p style="color:var(--text-muted); margin-bottom:4px;">
       ✔ ${correct} richtige &nbsp;|&nbsp; ✖ ${wrong} falsche Antworten
@@ -382,7 +384,7 @@ fetch("questions.json")
         const defaultBtn = document.querySelector('[data-theme="girl_power"]');
         if (defaultBtn) defaultBtn.classList.add("active-theme");
         
-        // AUTOMATISCHER TRIGGERS: Startet die Echsen-Uhr sofort, wenn die Fragen geladen sind!
+        // Startet den Echsen-Timer sobald die Daten da sind
         resetLizardTimer();
     })
     .catch(err => {
@@ -393,7 +395,7 @@ fetch("questions.json")
 
     
 /* ========================================
-   ECHSEN-STEUERUNG (SCHNELLE SCHLEIFE)
+   ECHSEN-STEUERUNG (ZEITBASIERTE SCHLEIFE)
    ======================================== */
 const lizard = document.getElementById("lizard");
 const toggleBtn = document.getElementById("lizardToggleBtn");
@@ -436,10 +438,9 @@ function hideLizardImmediately() {
     lizard.classList.add("lizard-hidden");
     lizard.classList.remove("lizard-walk-anim", "lizard-blink", "lizard-panic");
     lizardState = "hidden";
-    clearTimeout(lizardInterval); // GEÄNDERT: Nutzt jetzt setTimeout für präzise Steuerung
+    clearTimeout(lizardInterval);
 }
 
-// GEÄNDERT: Startet das erste Mal sofort beim Laden der Seite
 function resetLizardTimer() {
     clearTimeout(lizardInterval);
     if (lizardActive && lizardState === "hidden") {
@@ -516,12 +517,10 @@ function updateLizardBehavior(currentTime) {
     else if (lizardState === "escaping") {
         moveTowardsTarget(6.0, dt); 
         
-        // GEÄNDERT: Sobald sie den Bildschirmrand verlässt, wird der 3-Sekunden-Timer für das nächste Mal gestartet
         if (posX < -150 || posX > window.innerWidth + 150 || posY < -150 || posY > window.innerHeight + 150) {
             hideLizardImmediately();
             
             if (lizardActive) {
-                // Warte exakt 3 Sekunden (3000ms), dann spawne die Echse neu!
                 lizardInterval = setTimeout(() => {
                     if (lizardActive && lizardState === "hidden") spawnLizard();
                 }, 3000); 
