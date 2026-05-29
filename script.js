@@ -423,3 +423,21 @@ fetch("questions.json")
         if (defaultBtn) defaultBtn.classList.add("active-theme");
     })
     .catch(err => console.error("Fehler beim Laden der Fragen:", err));
+
+/* ========================================
+   ECHSEN-GIMMICK (TOGGLE)
+   ======================================== */
+function toggleLizard() {
+    const lizard = document.getElementById("lizard");
+    const btn = document.getElementById("lizardToggleBtn");
+    
+    if (!lizard || !btn) return; // Sicherheitscheck
+
+    if (lizard.classList.contains("lizard-hidden")) {
+        lizard.classList.remove("lizard-hidden");
+        btn.innerText = "🦎 An";
+    } else {
+        lizard.classList.add("lizard-hidden");
+        btn.innerText = "🦎 Aus";
+    }
+}
