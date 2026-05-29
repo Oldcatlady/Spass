@@ -407,10 +407,7 @@ fetch("questions.json")
 
     
 /* ========================================
-   ECHSEN-STEUERUNG (KI & ANIMATION)
-   ======================================== */
-/* ========================================
-   ECHSEN-STEUERUNG (ZEITBASIERTE KI)
+   ECHSEN-STEUERUNG (SCHNELLE SCHLEIFE)
    ======================================== */
 const lizard = document.getElementById("lizard");
 const toggleBtn = document.getElementById("lizardToggleBtn");
@@ -423,8 +420,6 @@ let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 let angle = 0;
 let lizardInterval = null;
-
-// NEU: Zeitstempel für die gleichmäßige Bewegung (unabhängig von Monitor-Hz)
 let lastTime = performance.now();
 
 window.addEventListener("mousemove", (e) => {
@@ -455,17 +450,15 @@ function hideLizardImmediately() {
     lizard.classList.add("lizard-hidden");
     lizard.classList.remove("lizard-walk-anim", "lizard-blink", "lizard-panic");
     lizardState = "hidden";
-    clearInterval(lizardInterval);
+    clearTimeout(lizardInterval); // GEÄNDERT: Nutzt jetzt setTimeout für präzise Steuerung
 }
 
+// GEÄNDERT: Startet das erste Mal sofort beim Laden der Seite
 function resetLizardTimer() {
-    clearInterval(lizardInterval);
+    clearTimeout(lizardInterval);
     if (lizardActive && lizardState === "hidden") {
         spawnLizard();
     }
-    lizardInterval = setInterval(() => {
-        if (lizardActive && lizardState === "hidden") spawnLizard();
-    }, 20000);
 }
 
 function spawnLizard() {
@@ -493,7 +486,6 @@ function spawnLizard() {
     targetX = window.innerWidth / 2;
     targetY = window.innerHeight / 2;
     
-    // Zeitmessung zurücksetzen und Schleife starten
     lastTime = performance.now();
     requestAnimationFrame(updateLizardBehavior);
 }
@@ -501,9 +493,8 @@ function spawnLizard() {
 function updateLizardBehavior(currentTime) {
     if (!lizardActive || lizardState === "hidden") return;
 
-    // Berechne, wie viel Zeit seit dem letzten Frame vergangen ist (Delta Time)
-    let dt = (currentTime - lastTime) / 16.666; // Normalisiert auf Basis von 60fps
-    if (dt > 4) dt = 4; // Sicherheits-Maximum gegen extreme Ruckler
+    let dt = (currentTime - lastTime) / 16.666; 
+    if (dt > 4) dt = 4; 
     lastTime = currentTime;
 
     if (lizardState === "panicking") {
@@ -512,19 +503,16 @@ function updateLizardBehavior(currentTime) {
     }
 
     if (lizardState === "walkingToCenter") {
-        // Angenehmes Tempo (2.5 Pixel pro Frame bei 60fps), angepasst an deine Framerate
         moveTowardsTarget(2.5, dt); 
         
-        // Großzügigerer Radius (25px statt 15px), damit sie das Ziel bei hohem Tempo nicht verfehlt
         if (Math.hypot(targetX - posX, targetY - posY) < 25) {
             lizardState = "staring";
             lizard.classList.remove("lizard-walk-anim");
             lizard.classList.add("lizard-blink");
             
-            angle = -Math.PI / 2; // Guckt starr nach oben
+            angle = -Math.PI / 2; 
             lizard.style.transform = `translate(${posX}px, ${posY}px) rotate(${angle}rad)`;
 
-            // Bleibt gemütliche 2,5 Sekunden in der Mitte sitzen
             setTimeout(() => {
                 if (lizardState === "staring") {
                     lizard.classList.remove("lizard-blink");
@@ -537,14 +525,21 @@ function updateLizardBehavior(currentTime) {
     else if (lizardState === "chasing") {
         targetX = mouseX;
         targetY = mouseY;
-        // Schleicht sich mit moderatem Tempo (2.0) an deine Maus heran
         moveTowardsTarget(2.0, dt); 
     }
     else if (lizardState === "escaping") {
-        // Fluchtgeschwindigkeit (6.0), schnell, aber für das Auge nachverfolgbar
         moveTowardsTarget(6.0, dt); 
+        
+        // GEÄNDERT: Sobald sie den Bildschirmrand verlässt, wird der 3-Sekunden-Timer für das nächste Mal gestartet
         if (posX < -150 || posX > window.innerWidth + 150 || posY < -150 || posY > window.innerHeight + 150) {
             hideLizardImmediately();
+            
+            if (lizardActive) {
+                // Warte exakt 3 Sekunden (3000ms), dann spawne die Echse neu!
+                lizardInterval = setTimeout(() => {
+                    if (lizardActive && lizardState === "hidden") spawnLizard();
+                }, 3000); 
+            }
             return; 
         }
     }
@@ -563,7 +558,6 @@ function moveTowardsTarget(currentSpeed, dt) {
 
     if (distance > 5) {
         angle = Math.atan2(dy, dx);
-        // Geschwindigkeit wird mit dem Zeitfaktor (dt) multipliziert
         posX += Math.cos(angle) * currentSpeed * dt;
         posY += Math.sin(angle) * currentSpeed * dt;
     }
@@ -603,7 +597,6 @@ function triggerEscapeRoutine() {
                 let chosenSide = escapeSides[Math.floor(Math.random() * escapeSides.length)];
                 targetX = chosenSide.x;
                 targetY = chosenSide.y;
-                // Nach dem Kreis wird "lastTime" resetttet, damit die Flucht flüssig startet
                 lastTime = performance.now();
                 lizardState = "escaping";
             }
