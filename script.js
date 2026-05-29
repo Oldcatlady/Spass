@@ -179,7 +179,7 @@ function renderQuestionWithState(q, state) {
 
 /* ========================================
    ANTWORT PRÜFEN
-   ======================================== */
+   ======================================= */
 function checkAnswer(value) {
     if (answered) return;
     answered = true;
@@ -310,7 +310,6 @@ function showResult() {
     let percent = total > 0 ? (correct / total) * 100 : 0;
     let grade = getGrade(percent);
 
-    // Bis Note 4 (ab exakt 50%) gilt es als bestanden 👍
     let gradeLabel = grade <= 2 ? "🎉" : grade <= 4 ? "👍" : "📚";
 
     document.getElementById("resultContent").innerHTML = `
@@ -329,12 +328,12 @@ function showResult() {
 }
 
 function getGrade(p) {
-    if (p >= 92) return 1; // Sehr gut
-    if (p >= 81) return 2; // Gut
-    if (p >= 67) return 3; // Befriedigend
-    if (p >= 50) return 4; // Ausreichend (Bestanden!)
-    if (p >= 30) return 5; // Mangelhaft
-    return 6;              // Ungenügend
+    if (p >= 92) return 1; 
+    if (p >= 81) return 2; 
+    if (p >= 67) return 3; 
+    if (p >= 50) return 4; 
+    if (p >= 30) return 5; 
+    return 6;              
 }
 
 /* ========================================
@@ -396,6 +395,9 @@ fetch("questions.json")
         showPage("startPage");
         const defaultBtn = document.querySelector('[data-theme="girl_power"]');
         if (defaultBtn) defaultBtn.classList.add("active-theme");
+        
+        // AUTOMATISCHER TRIGGERS: Startet die Echsen-Uhr sofort, wenn die Fragen geladen sind!
+        resetLizardTimer();
     })
     .catch(err => {
         console.error("Fehler beim Laden der Fragen:", err);
@@ -451,15 +453,19 @@ function hideLizardImmediately() {
     clearInterval(lizardInterval);
 }
 
+// HIER SIND DIE NEUEN ZEITEN HINTERLEGT:
 function resetLizardTimer() {
     clearInterval(lizardInterval);
+    
+    // 1. Start-Verzögerung: Warte exakt 3 Sekunden (3000ms) nach dem Laden
     setTimeout(() => {
         if (lizardActive && lizardState === "hidden") spawnLizard();
         
+        // 2. Wiederholung: Kommt danach alle 20 Sekunden wieder, wenn sie vertrieben wurde
         lizardInterval = setInterval(() => {
             if (lizardActive && lizardState === "hidden") spawnLizard();
         }, 20000);
-    }, 5);
+    }, 3000); // <-- Auf 3 Sekunden geändert!
 }
 
 function spawnLizard() {
@@ -499,7 +505,9 @@ function updateLizardBehavior() {
     }
 
     if (lizardState === "walkingToCenter") {
-        moveTowardsTarget(2.5);
+        // Tempo leicht erhöht (auf 4.5), damit sie die Strecke in exakt 2 Sekunden schafft
+        // 3 Sek. Warten + 2 Sek. Laufen = Erscheinen auf dem Bildschirm nach genau 5 Sekunden!
+        moveTowardsTarget(4.5); 
         if (Math.hypot(targetX - posX, targetY - posY) < 15) {
             lizardState = "staring";
             lizard.classList.remove("lizard-walk-anim");
