@@ -18,16 +18,20 @@ let history = [];
    ======================================== */
 function previewTheme(theme) {
     selectedTheme = theme;
+    // Wechselt sofort das Theme auf dem gesamten Body
     document.body.className = theme === "girl_power" ? "" : theme;
 
+    // Setzt den aktiven Rahmen auf den geklickten Button
     document.querySelectorAll(".theme-btn").forEach(btn => {
         btn.classList.toggle("active-theme", btn.dataset.theme === theme);
     });
 
+    // REPARIERT: Prüft erst, ob die Vorschau existiert, damit nichts abstürzt!
     const preview = document.getElementById("themePreview");
-    preview.classList.add("visible");
+    if (preview) {
+        preview.classList.add("visible");
+    }
 }
-
 /* ========================================
    SEITEN-NAVIGATION
    ======================================== */
