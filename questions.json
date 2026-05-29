@@ -1,0 +1,242 @@
+[
+    {
+        "question": "Was versteht man unter der Bildschirmdiagonale?",
+        "type": "mc",
+        "options": [
+            "A) Die Helligkeit des Monitors",
+            "B) Die Reaktionszeit",
+            "C) Die Größe des Displays von Ecke zu Ecke",
+            "D) Die Bildfrequenz"
+        ],
+        "answer": "C",
+        "explanation": "Die Bildschirmdiagonale ist der Abstand zwischen zwei gegenüberliegenden Ecken des Displays und wird in Zoll angegeben. Ein 27-Zoll-Monitor hat also eine Diagonale von 27 Zoll, was ca. 68,6 cm entspricht. Sie sagt nichts über Auflösung oder Bildqualität aus."
+    },
+    {
+        "question": "Was bedeutet Auflösung bei einem Monitor?",
+        "type": "mc",
+        "options": [
+            "A) Die Lautstärke",
+            "B) Anzahl der Pixel",
+            "C) Die Farbe",
+            "D) Die Stromstärke"
+        ],
+        "answer": "B",
+        "explanation": "Die Auflösung gibt an, aus wie vielen Pixeln das Bild aufgebaut ist – angegeben als Breite × Höhe, z. B. 1920×1080. Je mehr Pixel, desto schärfer und detailreicher das Bild. Bei größeren Monitoren ist eine hohe Auflösung besonders wichtig, damit das Bild nicht pixelig wirkt."
+    },
+    {
+        "question": "Welche Auflösung entspricht Full HD?",
+        "type": "mc",
+        "options": [
+            "A) 1280×720",
+            "B) 2560×1440",
+            "C) 3840×2160",
+            "D) 1920×1080"
+        ],
+        "answer": "D",
+        "explanation": "Full HD (FHD) steht für eine Auflösung von 1920×1080 Pixeln und ist der am weitesten verbreitete Standard für Monitore und Fernseher. Die darunter liegende Stufe ist HD mit 1280×720, darüber folgen QHD (2560×1440) und 4K (3840×2160). Full HD bietet ein gutes Gleichgewicht aus Bildschärfe und Systemanforderungen."
+    },
+    {
+        "question": "Was bedeutet 144 Hz?",
+        "type": "mc",
+        "options": [
+            "A) 144 Aktualisierungen pro Sekunde",
+            "B) 144 Pixel",
+            "C) 144 Farben",
+            "D) 144 Anschlüsse"
+        ],
+        "answer": "A",
+        "explanation": "Hz (Hertz) gibt die Bildwiederholrate an – also wie oft der Monitor das Bild pro Sekunde neu aufbaut. Bei 144 Hz werden 144 Bilder pro Sekunde dargestellt, was Bewegungen deutlich flüssiger wirken lässt als bei 60 Hz. Für schnelle Spiele ist eine hohe Bildwiederholrate ein klarer Vorteil."
+    },
+    {
+        "question": "Was beschreibt die Reaktionszeit?",
+        "type": "mc",
+        "options": [
+            "A) Die Größe des Monitors",
+            "B) Die Lautsprecherleistung",
+            "C) Die Auflösung",
+            "D) Wie schnell Pixel die Farbe wechseln"
+        ],
+        "answer": "D",
+        "explanation": "Die Reaktionszeit gibt an, wie schnell ein einzelner Pixel von einer Farbe zur nächsten wechseln kann, gemessen in Millisekunden (ms). Eine niedrige Reaktionszeit reduziert sogenanntes Ghosting – also Schlieren oder Nachziehen bei schnellen Bewegungen. Für kompetitives Gaming sind Werte von 1–5 ms ideal."
+    },
+    {
+        "question": "Was bedeutet PPI?",
+        "type": "mc",
+        "options": [
+            "A) Power Pixel Index",
+            "B) Pixel per Inch",
+            "C) Panel Picture Interface",
+            "D) Professional Pixel Image"
+        ],
+        "answer": "B",
+        "explanation": "PPI (Pixels per Inch) beschreibt die Pixeldichte eines Displays – also wie viele Pixel auf einem Zoll Bildschirmfläche liegen. Je höher der PPI-Wert, desto schärfer und feiner wirkt das Bild. Ein kleiner Monitor mit hoher Auflösung hat in der Regel einen höheren PPI als ein großer Monitor mit derselben Auflösung."
+    },
+    {
+        "question": "Welche Paneltypen gibt es?",
+        "type": "mc",
+        "options": [
+            "A) HDMI, VGA, USB",
+            "B) AMD, NVIDIA, Intel",
+            "C) TN, VA, IPS, OLED",
+            "D) Hz, FPS, RGB"
+        ],
+        "answer": "C",
+        "explanation": "Die gängigsten Displaytechnologien sind TN (Twisted Nematic), VA (Vertical Alignment), IPS (In-Plane Switching) und OLED (Organic Light-Emitting Diode). Jeder Typ hat eigene Stärken bei Reaktionszeit, Farbe, Kontrast oder Blickwinkel. Die Wahl des Paneltyps hängt stark vom Einsatzzweck ab."
+    },
+    {
+        "question": "Was ist der Vorteil eines TN-Panels?",
+        "type": "mc",
+        "options": [
+            "A) Beste Farben",
+            "B) Höchster Kontrast",
+            "C) Perfektes Schwarz",
+            "D) Schnelle Reaktionszeit"
+        ],
+        "answer": "D",
+        "explanation": "TN-Panels (Twisted Nematic) zeichnen sich durch sehr kurze Reaktionszeiten von oft unter 1 ms aus und eignen sich daher gut für kompetitives Gaming. Dafür sind Farbwiedergabe und Blickwinkel im Vergleich zu IPS oder OLED deutlich schwächer. Sie sind in der Regel auch günstiger als andere Paneltypen."
+    },
+    {
+        "question": "Was ist der Vorteil eines IPS-Panels?",
+        "type": "mc",
+        "options": [
+            "A) Beste Blickwinkel",
+            "B) Schlechteste Farben",
+            "C) Geringster Preis",
+            "D) Langsame Reaktion"
+        ],
+        "answer": "A",
+        "explanation": "IPS-Panels (In-Plane Switching) bieten die besten Blickwinkel aller LCD-Typen – Farben und Helligkeit bleiben auch von der Seite stabil. Zusätzlich liefern sie eine sehr gute Farbgenauigkeit, was sie ideal für Bildbearbeitung und Design macht. Neuere IPS-Varianten haben auch bei der Reaktionszeit deutlich aufgeholt."
+    },
+    {
+        "question": "Warum haben VA-Panels gute Schwarzwerte?",
+        "type": "mc",
+        "options": [
+            "A) Wegen hohem Kontrast",
+            "B) Wegen niedriger Auflösung",
+            "C) Wegen VGA",
+            "D) Wegen niedriger Hz"
+        ],
+        "answer": "A",
+        "explanation": "VA-Panels (Vertical Alignment) können Licht deutlich stärker blockieren als TN- oder IPS-Panels, was zu tiefen Schwarzwerten und hohem nativen Kontrast führt. Kontrastverhältnisse von 3000:1 oder mehr sind bei VA-Panels keine Seltenheit. Das macht sie besonders attraktiv für Filme und dunkle Spielszenen."
+    },
+    {
+        "question": "Was ist ein Nachteil von OLED-Displays?",
+        "type": "mc",
+        "options": [
+            "A) Keine Farben",
+            "B) Niedrige Auflösung",
+            "C) Burn-In Gefahr",
+            "D) Keine Reaktionszeit"
+        ],
+        "answer": "C",
+        "explanation": "Burn-In bezeichnet das dauerhafte Einbrennen von statischen Bildelementen in das Display, da organische Pixel sich mit der Zeit unterschiedlich abnutzen. Besonders gefährdet sind Bereiche mit dauerhaft sichtbaren Elementen wie Taskleisten oder HUD-Anzeigen in Spielen. Hersteller versuchen dies durch Pixelverschiebung und Bildschirmschoner zu minimieren."
+    },
+    {
+        "question": "Welcher Paneltyp eignet sich am besten für Bildbearbeitung?",
+        "type": "mc",
+        "options": [
+            "A) TN",
+            "B) VA",
+            "C) CRT",
+            "D) IPS"
+        ],
+        "answer": "D",
+        "explanation": "IPS-Panels bieten die genaueste und konsistenteste Farbwiedergabe über einen weiten Bereich von Blickwinkeln, was für die Bildbearbeitung unverzichtbar ist. Farben wirken unter verschiedenen Betrachtungswinkeln stabil und verfälscht nicht durch den Winkel. Viele professionelle Monitore für Grafik und Foto setzen daher auf IPS-Technologie."
+    },
+    {
+        "question": "Was macht Adaptive Sync?",
+        "type": "mc",
+        "options": [
+            "A) Erhöht die Lautstärke",
+            "B) Synchronisiert GPU und Monitor",
+            "C) Spart Strom",
+            "D) Erhöht Farben"
+        ],
+        "answer": "B",
+        "explanation": "Adaptive Sync synchronisiert die Bildwiederholrate des Monitors dynamisch mit der Bildrate der Grafikkarte. Dadurch wird Screen-Tearing verhindert, ohne die Eingabeverzögerung zu erhöhen wie beim klassischen V-Sync. Die bekanntesten Implementierungen sind AMDs FreeSync und NVIDIAs G-Sync."
+    },
+    {
+        "question": "Welche Adaptive-Sync-Technologie stammt von AMD?",
+        "type": "mc",
+        "options": [
+            "A) Bluetooth",
+            "B) USB",
+            "C) FreeSync",
+            "D) Ethernet"
+        ],
+        "answer": "C",
+        "explanation": "FreeSync ist AMDs Implementierung von Adaptive Sync und basiert auf dem offenen DisplayPort-Standard. Im Gegensatz zu NVIDIAs G-Sync benötigt FreeSync keine proprietäre Hardware im Monitor, weshalb FreeSync-Monitore oft günstiger sind. Viele FreeSync-Monitore sind mittlerweile auch mit NVIDIAs G-Sync Compatible zertifiziert."
+    },
+    {
+        "question": "Was ist Screen-Tearing?",
+        "type": "mc",
+        "options": [
+            "A) Screen-Tearing",
+            "B) Defekter Monitor",
+            "C) Schwarzer Bildschirm",
+            "D) Pixelfehler"
+        ],
+        "answer": "A",
+        "explanation": "Screen-Tearing entsteht, wenn die Grafikkarte ein neues Bild sendet, während der Monitor noch das vorherige aufbaut – es werden dann Teile zweier verschiedener Frames gleichzeitig angezeigt. Das Ergebnis ist ein horizontal zerrissenes Bild, das besonders bei schnellen Kamerabewegungen sichtbar wird. Adaptive Sync löst dieses Problem zuverlässig."
+    },
+    {
+        "question": "Warum bevorzugen Spieler 144-Hz-Monitore?",
+        "type": "mc",
+        "options": [
+            "A) Wegen höherer Lautstärke",
+            "B) Wegen flüssiger Bewegungen",
+            "C) Wegen größerer Pixel",
+            "D) Wegen VGA"
+        ],
+        "answer": "B",
+        "explanation": "Mit 144 Hz werden 144 Bilder pro Sekunde dargestellt, was Bewegungen deutlich flüssiger und reaktionsschneller macht als bei 60 Hz. In schnellen Spielen bedeutet das einen wahrnehmbar glatteren Spielablauf und potenziell schnellere Reaktionen. Der Unterschied zwischen 60 und 144 Hz ist selbst für ungeübte Augen sofort spürbar."
+    },
+    {
+        "question": "Warum ist eine geringe Reaktionszeit beim Gaming wichtig?",
+        "type": "mc",
+        "options": [
+            "A) Mehr Stromverbrauch",
+            "B) Mehr Lautsprecher",
+            "C) Weniger Ghosting",
+            "D) Mehr Gewicht"
+        ],
+        "answer": "C",
+        "explanation": "Ghosting bezeichnet Schlieren oder Nachzieheffekte bei schnellen Bewegungen, die entstehen, wenn Pixel nicht schnell genug ihre Farbe wechseln. Eine niedrige Reaktionszeit (1–5 ms) minimiert diesen effekt und sorgt für ein scharfes, klares Bild auch in schnellen Spielszenen. Besonders bei Egoshootern und Rennspielen ist das ein wichtiger Faktor."
+    },
+    {
+        "question": "Was bedeutet Blickwinkelstabilität?",
+        "type": "mc",
+        "options": [
+            "A) Der Monitor fällt nicht um",
+            "B) Farben bleiben stabil",
+            "C) Der Monitor dreht sich",
+            "D) Der Monitor wird heller"
+        ],
+        "answer": "B",
+        "explanation": "Blickwinkelstabilität beschreibt, wie gut Farben, Kontrast und Helligkeit erhalten bleiben, wenn man den Monitor aus einem schrägen Winkel betrachtet. IPS-Panels sind hier führend mit Winkeln von bis zu 178°, während TN-Panels deutliche Farbverfälschungen bereits ab kleinen Abweichungen zeigen. Für Teamarbeit oder Präsentationen ist gute Blickwinkelstabilität besonders wichtig."
+    },
+    {
+        "question": "Welcher Paneltyp hat die schlechtesten Blickwinkel?",
+        "type": "mc",
+        "options": [
+            "A) IPS",
+            "B) OLED",
+            "C) VA",
+            "D) TN"
+        ],
+        "answer": "D",
+        "explanation": "TN-Panels (Twisted Nematic) sind für ihre schwachen Blickwinkel bekannt – bereits bei leichter Abweichung vom idealen Betrachtungswinkel entstehen sichtbare Farbverfälschungen und Helligkeitsverluste. Das war historisch ihr größter Nachteil gegenüber IPS und VA. Für Einzelnutzung direkt vor dem Monitor ist dies weniger problematisch."
+    },
+    {
+        "question": "Was beschreibt das Kontrastverhältnis?",
+        "type": "mc",
+        "options": [
+            "A) Die Auflösung",
+            "B) Die Hz-Zahl",
+            "C) Unterschied zwischen hellstem und dunkelstem Bild",
+            "D) Die Lautstärke"
+        ],
+        "answer": "C",
+        "explanation": "Das Kontrastverhältnis gibt an, wie groß der Helligkeitsunterschied zwischen dem hellsten Weiß und dem dunkelsten Schwarz eines Monitors ist. Ein Verhältnis von 1000:1 bedeutet, dass das Weiß 1000-mal heller ist als das Schwarz. Hoher Kontrast sorgt für sattere Farben, tiefere Schwarztöne und ein insgesamt lebendigeres Bild."
+    }
+]
