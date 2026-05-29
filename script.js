@@ -459,7 +459,7 @@ function resetLizardTimer() {
         lizardInterval = setInterval(() => {
             if (lizardActive && lizardState === "hidden") spawnLizard();
         }, 20000);
-    }, 5000);
+    }, 5);
 }
 
 function spawnLizard() {
